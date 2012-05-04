@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20120510025219) do
+=======
+ActiveRecord::Schema.define(:version => 20120504202106) do
+>>>>>>> setup gem, user model pass
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -97,16 +101,16 @@ ActiveRecord::Schema.define(:version => 20120510025219) do
   create_table "campaigns", :force => true do |t|
     t.integer  "user_id"
     t.integer  "assigned_to"
-    t.string   "name",                :limit => 64,                                :default => "",       :null => false
-    t.string   "access",              :limit => 8,                                 :default => "Public"
+    t.string   "name",                :limit => 64, :default => "",       :null => false
+    t.string   "access",              :limit => 8,  :default => "Public"
     t.string   "status",              :limit => 64
-    t.decimal  "budget",                            :precision => 12, :scale => 2
+    t.decimal  "budget"
     t.integer  "target_leads"
     t.float    "target_conversion"
-    t.decimal  "target_revenue",                    :precision => 12, :scale => 2
+    t.decimal  "target_revenue"
     t.integer  "leads_count"
     t.integer  "opportunities_count"
-    t.decimal  "revenue",                           :precision => 12, :scale => 2
+    t.decimal  "revenue"
     t.date     "starts_on"
     t.date     "ends_on"
     t.text     "objectives"
@@ -216,12 +220,18 @@ ActiveRecord::Schema.define(:version => 20120510025219) do
     t.string   "hint"
     t.string   "placeholder"
     t.string   "as",             :limit => 32
-    t.text     "collection"
+    t.text     "collection",     :limit => 255
     t.boolean  "disabled"
     t.boolean  "required"
+<<<<<<< HEAD
     t.integer  "maxlength"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+=======
+    t.integer  "maxlength",      :limit => 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+>>>>>>> setup gem, user model pass
   end
 
   add_index "fields", ["field_group_id"], :name => "index_fields_on_field_group_id"
@@ -271,13 +281,13 @@ ActiveRecord::Schema.define(:version => 20120510025219) do
     t.integer  "user_id"
     t.integer  "campaign_id"
     t.integer  "assigned_to"
-    t.string   "name",             :limit => 64,                                :default => "",       :null => false
-    t.string   "access",           :limit => 8,                                 :default => "Public"
+    t.string   "name",             :limit => 64, :default => "",       :null => false
+    t.string   "access",           :limit => 8,  :default => "Public"
     t.string   "source",           :limit => 32
     t.string   "stage",            :limit => 32
     t.integer  "probability"
-    t.decimal  "amount",                         :precision => 12, :scale => 2
-    t.decimal  "discount",                       :precision => 12, :scale => 2
+    t.decimal  "amount"
+    t.decimal  "discount"
     t.date     "closes_on"
     t.datetime "deleted_at"
     t.datetime "created_at",                                                                          :null => false
@@ -293,8 +303,13 @@ ActiveRecord::Schema.define(:version => 20120510025219) do
     t.integer  "user_id"
     t.integer  "asset_id"
     t.string   "asset_type"
+<<<<<<< HEAD
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+=======
+    t.datetime "created_at"
+    t.datetime "updated_at"
+>>>>>>> setup gem, user model pass
   end
 
   add_index "permissions", ["asset_id", "asset_type"], :name => "index_permissions_on_asset_id_and_asset_type"
@@ -369,41 +384,57 @@ ActiveRecord::Schema.define(:version => 20120510025219) do
   add_index "tasks", ["user_id", "name", "deleted_at"], :name => "index_tasks_on_user_id_and_name_and_deleted_at", :unique => true
 
   create_table "users", :force => true do |t|
-    t.string   "username",            :limit => 32, :default => "",    :null => false
-    t.string   "email",               :limit => 64, :default => "",    :null => false
-    t.string   "first_name",          :limit => 32
-    t.string   "last_name",           :limit => 32
-    t.string   "title",               :limit => 64
-    t.string   "company",             :limit => 64
-    t.string   "alt_email",           :limit => 64
-    t.string   "phone",               :limit => 32
-    t.string   "mobile",              :limit => 32
-    t.string   "aim",                 :limit => 32
-    t.string   "yahoo",               :limit => 32
-    t.string   "google",              :limit => 32
-    t.string   "skype",               :limit => 32
-    t.string   "password_hash",                     :default => "",    :null => false
-    t.string   "password_salt",                     :default => "",    :null => false
-    t.string   "persistence_token",                 :default => "",    :null => false
-    t.string   "perishable_token",                  :default => "",    :null => false
+    t.string   "username",               :limit => 32, :default => "",    :null => false
+    t.string   "email",                  :limit => 64, :default => "",    :null => false
+    t.string   "first_name",             :limit => 32
+    t.string   "last_name",              :limit => 32
+    t.string   "title",                  :limit => 64
+    t.string   "company",                :limit => 64
+    t.string   "alt_email",              :limit => 64
+    t.string   "phone",                  :limit => 32
+    t.string   "mobile",                 :limit => 32
+    t.string   "aim",                    :limit => 32
+    t.string   "yahoo",                  :limit => 32
+    t.string   "google",                 :limit => 32
+    t.string   "skype",                  :limit => 32
+    t.string   "password_hash",                        :default => "",    :null => false
+    t.string   "password_salt",                        :default => "",    :null => false
+    t.string   "persistence_token",                    :default => "",    :null => false
+    t.string   "perishable_token",                     :default => "",    :null => false
     t.datetime "last_request_at"
     t.datetime "last_login_at"
     t.datetime "current_login_at"
     t.string   "last_login_ip"
     t.string   "current_login_ip"
-    t.integer  "login_count",                       :default => 0,     :null => false
+    t.integer  "login_count",                          :default => 0,     :null => false
     t.datetime "deleted_at"
+<<<<<<< HEAD
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
     t.boolean  "admin",                             :default => false, :null => false
+=======
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "admin",                                :default => false, :null => false
+>>>>>>> setup gem, user model pass
     t.datetime "suspended_at"
     t.string   "single_access_token"
+    t.string   "encrypted_password",                   :default => "",    :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                        :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
   add_index "users", ["perishable_token"], :name => "index_users_on_perishable_token"
   add_index "users", ["persistence_token"], :name => "index_users_on_remember_token"
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["username", "deleted_at"], :name => "index_users_on_username_and_deleted_at", :unique => true
 
   create_table "versions", :force => true do |t|

@@ -12,8 +12,7 @@ end
 #----------------------------------------------------------------------------
 def login(user_stubs = {}, session_stubs = {})
   User.current_user = @current_user = FactoryGirl.create(:user, user_stubs)
-  @current_user_session = mock(Authentication, {:record => @current_user}.merge(session_stubs))
-  Authentication.stub!(:find).and_return(@current_user_session)
+  @current_user_session = mock(Devise::SessionsController, {:user => @current_user})
   #set_timezone
 end
 alias :require_user :login
