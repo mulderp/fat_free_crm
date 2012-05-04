@@ -7,7 +7,7 @@ describe UsersController do
   #----------------------------------------------------------------------------
   describe "responding to GET show" do
     before(:each) do
-      require_user
+      login_test_user
     end
 
     it "should expose the requested user as @user and render [show] template" do
@@ -19,6 +19,7 @@ describe UsersController do
     end
 
     it "should expose current user as @user if no specific user was requested" do
+      puts @current_user
       get :show
       assigns[:user].should == @current_user
       response.should render_template("users/show")
