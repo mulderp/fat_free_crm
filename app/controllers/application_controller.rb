@@ -22,7 +22,6 @@ class ApplicationController < ActionController::Base
   before_filter "hook(:app_before_filter, self)"
   after_filter  "hook(:app_after_filter,  self)"
 
-  helper_method :current_user_session, :current_user, :can_signup?
   helper_method :called_from_index_page?, :called_from_landing_page?
   helper_method :klass
 
@@ -38,7 +37,7 @@ class ApplicationController < ActionController::Base
   #----------------------------------------------------------------------------
   def auto_complete
     @query = params[:auto_complete_query] || ''
-    @auto_complete = hook(:auto_complete, self, :query => @query, :user => @current_user)
+    @auto_complete = hook(:auto_complete, self, :query => @query, :user => current_user)
     if @auto_complete.empty?
       @auto_complete = klass.my.text_search(@query).limit(10)
     else

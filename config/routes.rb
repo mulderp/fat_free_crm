@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "users", :sessions => "sessions", :passwords => "passwords"}
+ 
+  devise_scope :user do
+    resources :users, :only => [:index, :show]
+    get "login", :to => "sessions#new"
+    get "logout", :to => "sessions#destroy", :as => :logout
+    get "signup", :to => "registrations#new"
+  end
 
   resources :lists
 
@@ -7,10 +14,7 @@ Rails.application.routes.draw do
 
   match 'activities' => 'home#index'
   match 'admin'      => 'admin/users#index',       :as => :admin
-  match 'login'      => 'authentications#new',     :as => :login
-  match 'logout'     => 'authentications#destroy', :as => :logout
   match 'profile'    => 'users#show',              :as => :profile
-  match 'signup'     => 'users#new',               :as => :signup
 
   match '/home/options',  :as => :options
   match '/home/toggle',   :as => :toggle
@@ -18,7 +22,6 @@ Rails.application.routes.draw do
   match '/home/timezone', :as => :timezone
   match '/home/redraw',   :as => :redraw
 
-  resource  :authentication
   resources :comments
   resources :emails
   resources :passwords
