@@ -10,7 +10,7 @@
       = link_to(t(:profile), profile_path) << " |"
       - if @current_user.admin?
         = link_to(t(:admin), admin_path) << " |"
-      = link_to(t(:logout), logout_path, :method => :delete)
+      = link_to(t(:logout), logout_path)
       = render "/layouts/jumpbox"
     - else
       = link_to(t(:login), login_path) << " |"
