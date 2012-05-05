@@ -7,21 +7,19 @@ describe UsersController do
   #----------------------------------------------------------------------------
   describe "responding to GET show" do
     before(:each) do
-      login_test_user
+      @user = FactoryGirl.create(:user)
+      sign_in(:user, @user)
     end
 
     it "should expose the requested user as @user and render [show] template" do
-      @user = FactoryGirl.create(:user)
-
       get :show, :id => @user.id
       assigns[:user].should == @user
       response.should render_template("users/show")
     end
 
     it "should expose current user as @user if no specific user was requested" do
-      puts @current_user
       get :show
-      assigns[:user].should == @current_user
+      assigns[:user].should == @user
       response.should render_template("users/show")
     end
 
