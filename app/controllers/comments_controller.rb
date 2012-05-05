@@ -16,7 +16,7 @@
 #------------------------------------------------------------------------------
 
 class CommentsController < ApplicationController
-  before_filter :require_user
+  before_filter :authenticate_user!
 
   COMMENTABLE = %w(account_id campaign_id contact_id lead_id opportunity_id task_id).freeze
 
