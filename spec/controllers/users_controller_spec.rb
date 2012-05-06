@@ -273,6 +273,7 @@ describe UsersController do
       @new_password = "secret?!"
     end
 
+    # TODO: Password change is taken care of by Devise
     it "should set new user password" do
       xhr :put, :change_password, :id => @user.id, :current_password => @user.password, :user => { :password => @new_password, :password_confirmation => @new_password }
       assigns[:user].should == @controller.current_user
