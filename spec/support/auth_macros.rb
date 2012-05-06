@@ -16,26 +16,16 @@
 # alias :require_user :login_test_user
 
 #----------------------------------------------------------------------------
-def login_and_assign(user_stubs = {}, session_stubs = {})
-  login(user_stubs, session_stubs)
-  assigns[:current_user] = @current_user
-end
-
-#----------------------------------------------------------------------------
-def logout
-  @current_user = nil
-  @current_user_session = nil
-  Authentication.stub!(:find).and_return(nil)
-end
-alias :require_no_user :logout
-
-#----------------------------------------------------------------------------
-def current_user
-  @current_user
-end
-
-#----------------------------------------------------------------------------
-def current_user_session
-  @current_user_session
-end
-
+# def login_and_assign(user_stubs = {}, session_stubs = {})
+#   login(user_stubs, session_stubs)
+#   assigns[:current_user] = @current_user
+# end
+# 
+# #----------------------------------------------------------------------------
+# def logout
+#   @current_user = nil
+#   @current_user_session = nil
+#   Authentication.stub!(:find).and_return(nil)
+# end
+# alias :require_no_user :logout
+# 

@@ -2,11 +2,16 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe HomeController do
 
+  let(:user) do
+    FactoryGirl.create(:user)
+  end
+
   # GET /
   #----------------------------------------------------------------------------
   describe "responding to GET /" do
+
     before(:each) do
-      require_user
+      sign_in(:user, user)
     end
 
     it "should get a list of activities" do
@@ -18,7 +23,6 @@ describe HomeController do
     end
 
     it "should assign @hello and call hook" do
-      require_user
       controller.should_receive(:hook).at_least(:once)
 
       get :index
@@ -30,7 +34,7 @@ describe HomeController do
   #----------------------------------------------------------------------------
   describe "responding to GET options" do
     before(:each) do
-      require_user
+      sign_in(:user, user)
     end
 
     it "should assign instance variables for user preferences" do

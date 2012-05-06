@@ -4,8 +4,12 @@ describe CommentsController do
 
   COMMENTABLE = [ :account, :campaign, :contact, :lead, :opportunity ].freeze
 
+  let(:user) do
+    FactoryGirl.create(:user)
+  end
+
   before(:each) do
-    require_user
+    sign_in(:user, user)
   end
 
   # GET /comments
