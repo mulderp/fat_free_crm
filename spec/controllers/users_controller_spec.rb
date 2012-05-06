@@ -41,7 +41,9 @@ describe UsersController do
       end
 
       it "should render current user as JSON if no specific user was requested" do
-        @current_user.should_receive(:to_json).and_return("generated JSON")
+        user = FactoryGirl.create(:user)
+        user.should_receive(:to_json).and_return("generated JSON")
+        @controller.stub!(:current_user).and_return(user)
 
         get :show
         response.body.should == "generated JSON"
@@ -62,12 +64,9 @@ describe UsersController do
       end
 
       it "should render current user as XML if no specific user was requested" do
-        user = mock_model(User, permissions: mock(Ability))
-        CanCan.stub!(:load_resource)
-        controller.stub!(:load_resource)
-        controller.stub!(:authenticate_user!).and_return(true)
-        controller.stub!(:current_user).and_return(user)
-        current_user.should_receive(:to_xml).and_return("generated XML")
+        user = FactoryGirl.create(:user)
+        user.should_receive(:to_xml).and_return("generated XML")
+        @controller.stub!(:current_user).and_return(user)
 
         get :show
         response.body.should == "generated XML"

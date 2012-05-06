@@ -155,10 +155,10 @@ private
   #----------------------------------------------------------------------------
   def require_and_assign_user
     authenticate_user!
-    @user = @current_user
+    @user = current_user
   end
 
   def assign_given_or_current_user
-    @user = params[:id] ? User.find(params[:id]) : @current_user
+    @user = params[:id] ? User.find(params[:id]) : current_user
   end
 end
