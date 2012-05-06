@@ -62,7 +62,7 @@ describe HomeController do
   #----------------------------------------------------------------------------
   describe "responding to POST redraw" do
     before(:each) do
-      require_user
+      sign_in(:user, user)
     end
 
     it "should save user selected options" do

@@ -2,12 +2,16 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe UsersController do
 
+  let(:user) do
+    FactoryGirl.create(:user)
+  end
+
   # GET /users/1
   # GET /users/1.xml                                                       HTML
   #----------------------------------------------------------------------------
   describe "responding to GET show" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = user
       sign_in(:user, @user)
     end
 
@@ -102,8 +106,8 @@ describe UsersController do
   #----------------------------------------------------------------------------
   describe "responding to GET edit" do
     before(:each) do
-      require_user
-      @user = @current_user
+      @user = user
+      sign_in(:user, @user)
     end
 
     it "should expose current user as @user and render [edit] template" do
@@ -162,8 +166,8 @@ describe UsersController do
   #----------------------------------------------------------------------------
   describe "responding to PUT update" do
     before(:each) do
-      require_user
-      @user = @current_user
+      @user = user
+      sign_in(:user, @user)
     end
 
     describe "with valid params" do
@@ -194,7 +198,7 @@ describe UsersController do
   #----------------------------------------------------------------------------
   describe "responding to DELETE destroy" do
     before(:each) do
-      require_user
+      sign_in(:user, user)
     end
 
     it "should destroy the requested user" do
@@ -210,8 +214,8 @@ describe UsersController do
   #----------------------------------------------------------------------------
   describe "responding to GET avatar" do
     before(:each) do
-      require_user
-      @user = @current_user
+      @user = user
+      sign_in(:user, @user)
     end
 
     it "should expose current user as @user and render [avatar] template" do
@@ -226,8 +230,8 @@ describe UsersController do
   #----------------------------------------------------------------------------
   describe "responding to PUT update_avatar" do
     before(:each) do
-      require_user
-      @user = @current_user
+      @user = user
+      sign_in(:user, @user)
     end
 
     it "should delete avatar if user chooses to use Gravatar" do
@@ -274,8 +278,8 @@ describe UsersController do
   #----------------------------------------------------------------------------
   describe "responding to GET avatar" do
     before(:each) do
-      require_user
-      @user = @current_user
+      @user = user
+      sign_in(:user, @user)
     end
 
     it "should expose current user as @user and render [pssword] template" do
@@ -290,7 +294,7 @@ describe UsersController do
   #----------------------------------------------------------------------------
   describe "responding to PUT change_password" do
     before(:each) do
-      require_user
+      sign_in(:user, user)
       @current_user_session.stub!(:unauthorized_record=).and_return(@current_user)
       @current_user_session.stub!(:save).and_return(@current_user)
       @user = @current_user
