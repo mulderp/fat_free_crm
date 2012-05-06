@@ -2,8 +2,12 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe LeadsController do
 
+  let(:user) do
+    FactoryGirl.create(:user)
+  end
+
   before(:each) do
-    require_user
+    sign_in(:user, user)
     set_current_tab(:leads)
   end
 

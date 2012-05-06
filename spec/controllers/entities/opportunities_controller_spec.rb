@@ -6,8 +6,12 @@ describe OpportunitiesController do
     @stage = Setting.unroll(:opportunity_stage)
   end
 
-  before do
-    require_user
+  let(:user) do
+    FactoryGirl.create(:user)
+  end
+
+  before(:each) do
+    sign_in(:user, user)
     set_current_tab(:opportunities)
   end
 
