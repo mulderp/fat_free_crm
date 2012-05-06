@@ -5,8 +5,12 @@ describe AccountsController do
     @category = Setting.account_category.dup
   end
 
-  before do
-    require_user
+  let(:user) do
+    FactoryGirl.create(:user)
+  end
+
+  before(:each) do
+    sign_in(:user, user)
     set_current_tab(:accounts)
   end
 
