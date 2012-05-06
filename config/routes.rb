@@ -3,7 +3,7 @@ Rails.application.routes.draw do
  
   devise_scope :user do
     resources :users, :only => [:index, :show]
-    get "login", :to => "sessions#new"
+    get "login", :to => "sessions#new", :as => :new_user_session
     get "logout", :to => "sessions#destroy", :as => :logout
     get "signup", :to => "registrations#new"
   end
