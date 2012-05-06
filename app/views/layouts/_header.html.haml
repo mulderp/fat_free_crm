@@ -13,7 +13,7 @@
       = link_to(t(:logout), logout_path)
       = render "/layouts/jumpbox"
     - else
-      = link_to(t(:login), login_path) << " |"
+      = link_to(t(:login), new_user_session_path) << " |"
       = link_to(t(:sign_up), signup_path) << " |"
       = link_to(t(:about), "#", :title => t(:about_ffc), :onclick => "Modalbox.show($('about'), { title: this.title }); return false;")
   %h3

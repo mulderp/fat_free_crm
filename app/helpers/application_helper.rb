@@ -29,7 +29,7 @@ module ApplicationHelper
 
   #----------------------------------------------------------------------------
   def tabless_layout?
-    %w(sessions registrations).include?(controller.controller_name) ||
+    %w(sessions passwords registrations).include?(controller.controller_name) ||
     ((controller.controller_name == "users") && (%w(create new).include?(controller.action_name)))
   end
 
