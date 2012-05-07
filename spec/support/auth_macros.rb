@@ -16,11 +16,12 @@
 # alias :require_user :login_test_user
 
 #----------------------------------------------------------------------------
-# def login_and_assign(user_stubs = {}, session_stubs = {})
-#   login(user_stubs, session_stubs)
-#   assigns[:current_user] = @current_user
-# end
-# 
+def login_and_assign(user_stubs = {}, session_stubs = {})
+  @current_user = FactoryGirl.create(:user)
+  @controller.stub!(:current_user).and_return(@current_user)
+  @current_user
+end
+ 
 # #----------------------------------------------------------------------------
 # def logout
 #   @current_user = nil

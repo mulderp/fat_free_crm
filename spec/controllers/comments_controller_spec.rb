@@ -9,7 +9,8 @@ describe CommentsController do
   end
 
   before(:each) do
-    sign_in(:user, user)
+    @current_user = user
+    sign_in(:user, @current_user)
   end
 
   # GET /comments
@@ -20,6 +21,8 @@ describe CommentsController do
       describe "(HTML)" do
         before(:each) do
           @asset = FactoryGirl.create(asset)
+    @current_user = user
+    sign_in(:user, @current_user)
         end
 
         it "should redirect to the asset landing page if the asset is found" do
