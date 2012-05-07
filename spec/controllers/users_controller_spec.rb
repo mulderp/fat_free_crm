@@ -267,8 +267,8 @@ describe UsersController do
   describe "responding to PUT change_password" do
     before(:each) do
       sign_in(:user, user)
-      @controller.current_user_session.stub!(:unauthorized_record=).and_return(@controller.current_user)
-      @controller.current_user_session.stub!(:save).and_return(@controller.current_user)
+      @controller.current_user.stub!(:unauthorized_record=).and_return(@controller.current_user)
+      @controller.current_user.stub!(:save).and_return(@controller.current_user)
       @user = @controller.current_user
       @new_password = "secret?!"
     end
