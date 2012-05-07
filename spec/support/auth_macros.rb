@@ -1,12 +1,13 @@
 # #----------------------------------------------------------------------------
 # # Note: Authentication is NOT ActiveRecord model, so we mock and stub it using RSpec.
-# #----------------------------------------------------------------------------
-# def login(user_stubs = {}, session_stubs = {})
-#   User.current_user = @current_user = FactoryGirl.create(:user, user_stubs)
-#   @current_user_session = mock(Devise::SessionsController, {:user => @current_user})
-#   #set_timezone
-# end
-# 
+#----------------------------------------------------------------------------
+def login(user_stubs = {}, session_stubs = {})
+  User.current_user = @current_user = FactoryGirl.create(:user, user_stubs)
+  @controller.stub!(:current_user).and_return(@current_user)
+  @current_user
+  #set_timezone
+end
+
 # def login_test_user
 #   #mock up an authentication in warden as per http://www.michaelharrison.ws/weblog/?p=349
 #   request.env['warden'] = mock(Warden, :authenticate => login,
@@ -17,7 +18,7 @@
 
 #----------------------------------------------------------------------------
 def login_and_assign(user_stubs = {}, session_stubs = {})
-  @current_user = FactoryGirl.create(:user)
+  login(user_stubs, session_stubs)
   @controller.stub!(:current_user).and_return(@current_user)
   @current_user
 end
