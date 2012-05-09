@@ -1,4 +1,4 @@
-# Fat Free CRM
+
 # Copyright (C) 2008-2011 by Michael Dvorkin
 #
 # This program is free software: you can redistribute it and/or modify
@@ -60,6 +60,9 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_protected :admin, :suspended_at
+
+  attr_accessor :login
+
 
   before_create  :check_if_needs_approval
   before_destroy :check_if_current_user, :check_if_has_related_assets
@@ -176,5 +179,15 @@ class User < ActiveRecord::Base
       sum += klass.created_by(self).count
     end
     artifacts == 0
+  end
+
+  protected
+
+  def self.find_for_database_authentication(conditions)
+    login = conditions.delete(:login)
+    where(conditions)
+    .where(["username = :login OR email = :login", 
+           {:login => login}])
+    .first
   end
 end
