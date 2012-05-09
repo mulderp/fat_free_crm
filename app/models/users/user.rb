@@ -181,6 +181,16 @@ class User < ActiveRecord::Base
     artifacts == 0
   end
 
+  # Single access token: clear token
+  # def after_token_authentication
+  #   update_attributes :authentication_token => nil
+  # end
+  
+  # Single access token:  reset the authentication,
+  def after_token_authentication
+    reset_authentication_token!
+  end
+
   protected
 
   def self.find_for_database_authentication(conditions)
