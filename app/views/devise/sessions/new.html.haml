@@ -12,7 +12,7 @@
 
 .standalone#standalone
   = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-    .title_tools #{t :no_account} #{link_to t(:sign_up_now), signup_path}
+    .title_tools #{t :no_account} #{link_to t(:sign_up_now), new_user_registration_path}
     .title= t(:login)
     .section
       .label= t(:login) + ':'

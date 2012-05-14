@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users, :controllers => {:registrations => "users", :sessions => "sessions", :passwords => "passwords"}
+  devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions", :passwords => "passwords"}
  
   devise_scope :user do
     resources :users, :only => [:index, :show]
     get "login", :to => "sessions#new", :as => :new_user_session
     get "logout", :to => "sessions#destroy", :as => :logout
     get "signup", :to => "registrations#new"
+    post "signup", :to => "registrations#create", :as => :user_registration
   end
 
   resources :lists
