@@ -10,19 +10,13 @@
       }});
     });
 
-.standalone#standalone
-  = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-    .title_tools #{t :no_account} #{link_to t(:sign_up_now), new_user_registration_path}
-    .title= t(:login)
+.standalone
+  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+    .title #{t :forgot_password}
+    .intro #{t :password_intro}
     .section
-      .label= t(:login) + ':'
-      = f.text_field :login
-      .label= t(:password) + ':'
-      = f.password_field :password
-
-    %div(style="margin-left:12px") #{f.check_box(:remember_me)} #{t :remember_me}
+      .label #{t :email}:
+      = f.email_field :email
     %br
     .buttonbar
-      = f.submit t(:login)
-      #{t :or}
-      = link_to t(:forgot_password) << '?', new_user_password_path
+      = submit_tag t(:reset_password), :id => "passwords_submit"

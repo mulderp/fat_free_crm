@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get "logout", :to => "sessions#destroy", :as => :logout
     get "signup", :to => "registrations#new"
     post "signup", :to => "registrations#create", :as => :user_registration
+    get "passwords", :to => "passwords#new", :as => :new_user_password
   end
 
   resources :lists
@@ -25,7 +26,6 @@ Rails.application.routes.draw do
 
   resources :comments
   resources :emails
-  resources :passwords
 
   resources :accounts, :id => /\d+/ do
     collection do
@@ -139,9 +139,7 @@ Rails.application.routes.draw do
   resources :users, :id => /\d+/ do
     member do
       get :avatar
-      get :password
       put :upload_avatar
-      put :change_password
     end
   end
 
