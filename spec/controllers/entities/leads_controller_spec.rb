@@ -7,7 +7,8 @@ describe LeadsController do
   end
 
   before(:each) do
-    sign_in(:user, user)
+    @current_user = user
+    sign_in(:user, @current_user)
     set_current_tab(:leads)
   end
 
