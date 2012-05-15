@@ -11,15 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20120510025219) do
-=======
-ActiveRecord::Schema.define(:version => 20120504202106) do
->>>>>>> setup gem, user model pass
-=======
-ActiveRecord::Schema.define(:version => 20120413034923) do
->>>>>>> allow login and email as login
+ActiveRecord::Schema.define(:version => 20120515204644) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -224,24 +216,12 @@ ActiveRecord::Schema.define(:version => 20120413034923) do
     t.string   "hint"
     t.string   "placeholder"
     t.string   "as",             :limit => 32
-    t.text     "collection"
+    t.text     "collection",     :limit => 255
     t.boolean  "disabled"
     t.boolean  "required"
-<<<<<<< HEAD
-<<<<<<< HEAD
-    t.integer  "maxlength"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-=======
     t.integer  "maxlength",      :limit => 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
->>>>>>> setup gem, user model pass
-=======
-    t.integer  "maxlength"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
->>>>>>> allow login and email as login
   end
 
   add_index "fields", ["field_group_id"], :name => "index_fields_on_field_group_id"
@@ -313,18 +293,8 @@ ActiveRecord::Schema.define(:version => 20120413034923) do
     t.integer  "user_id"
     t.integer  "asset_id"
     t.string   "asset_type"
-<<<<<<< HEAD
-<<<<<<< HEAD
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-=======
-    t.datetime "created_at"
-    t.datetime "updated_at"
->>>>>>> setup gem, user model pass
-=======
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
->>>>>>> allow login and email as login
   end
 
   add_index "permissions", ["asset_id", "asset_type"], :name => "index_permissions_on_asset_id_and_asset_type"
@@ -399,53 +369,43 @@ ActiveRecord::Schema.define(:version => 20120413034923) do
   add_index "tasks", ["user_id", "name", "deleted_at"], :name => "index_tasks_on_user_id_and_name_and_deleted_at", :unique => true
 
   create_table "users", :force => true do |t|
-    t.string   "username",            :limit => 32, :default => "",    :null => false
-    t.string   "email",               :limit => 64, :default => "",    :null => false
-    t.string   "first_name",          :limit => 32
-    t.string   "last_name",           :limit => 32
-    t.string   "title",               :limit => 64
-    t.string   "company",             :limit => 64
-    t.string   "alt_email",           :limit => 64
-    t.string   "phone",               :limit => 32
-    t.string   "mobile",              :limit => 32
-    t.string   "aim",                 :limit => 32
-    t.string   "yahoo",               :limit => 32
-    t.string   "google",              :limit => 32
-    t.string   "skype",               :limit => 32
-    t.string   "password_hash",                     :default => "",    :null => false
-    t.string   "password_salt",                     :default => "",    :null => false
-    t.string   "persistence_token",                 :default => "",    :null => false
-    t.string   "perishable_token",                  :default => "",    :null => false
+    t.string   "username",               :limit => 32, :default => "",    :null => false
+    t.string   "email",                  :limit => 64, :default => "",    :null => false
+    t.string   "first_name",             :limit => 32
+    t.string   "last_name",              :limit => 32
+    t.string   "title",                  :limit => 64
+    t.string   "company",                :limit => 64
+    t.string   "alt_email",              :limit => 64
+    t.string   "phone",                  :limit => 32
+    t.string   "mobile",                 :limit => 32
+    t.string   "aim",                    :limit => 32
+    t.string   "yahoo",                  :limit => 32
+    t.string   "google",                 :limit => 32
+    t.string   "skype",                  :limit => 32
+    t.string   "password_hash",                        :default => "",    :null => false
+    t.string   "password_salt",                        :default => "",    :null => false
     t.datetime "last_request_at"
-    t.datetime "last_login_at"
-    t.datetime "current_login_at"
-    t.string   "last_login_ip"
-    t.string   "current_login_ip"
-    t.integer  "login_count",                       :default => 0,     :null => false
+    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at"
+    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip"
+    t.integer  "sign_in_count",                        :default => 0
     t.datetime "deleted_at"
-<<<<<<< HEAD
-<<<<<<< HEAD
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
-    t.boolean  "admin",                             :default => false, :null => false
-=======
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
     t.boolean  "admin",                                :default => false, :null => false
->>>>>>> setup gem, user model pass
-=======
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
-    t.boolean  "admin",                             :default => false, :null => false
->>>>>>> allow login and email as login
     t.datetime "suspended_at"
-    t.string   "single_access_token"
+    t.string   "encrypted_password",                   :default => "",    :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string   "authentication_token"
   end
 
+  add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
-  add_index "users", ["perishable_token"], :name => "index_users_on_perishable_token"
-  add_index "users", ["persistence_token"], :name => "index_users_on_remember_token"
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["username", "deleted_at"], :name => "index_users_on_username_and_deleted_at", :unique => true
 
   create_table "versions", :force => true do |t|
