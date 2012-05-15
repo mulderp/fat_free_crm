@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get "signup", :to => "registrations#new"
     post "signup", :to => "registrations#create", :as => :user_registration
     get "passwords", :to => "passwords#new", :as => :new_user_password
+    post "passwords", :to => "passwords#create", :as => :user_password
   end
 
   resources :lists
