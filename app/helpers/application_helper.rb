@@ -29,7 +29,7 @@ module ApplicationHelper
 
   #----------------------------------------------------------------------------
   def tabless_layout?
-    %w(authentications passwords).include?(controller.controller_name) ||
+    %w(sessions passwords registrations).include?(controller.controller_name) ||
     ((controller.controller_name == "users") && (%w(create new).include?(controller.action_name)))
   end
 
@@ -387,7 +387,7 @@ module ApplicationHelper
   # Helper to display links to supported data export formats.
   #----------------------------------------------------------------------------
   def links_to_export
-    token = @current_user.single_access_token
+    token = @current_user.authentication_token
     path = if controller.controller_name == 'home'
       activities_path
     elsif controller.class.to_s.starts_with?("Admin::")

@@ -3,8 +3,17 @@ source :rubygems
 # Uncomment the database that you have configured in config/database.yml
 # ----------------------------------------------------------------------
 # gem 'mysql2', '0.3.10'
-# gem 'sqlite3'
-gem 'pg', '~> 0.13.2'
+gem 'sqlite3'
+# gem 'pg', '~> 0.13.2'
+
+# Allows easy switching between locally developed gems, and gems installed from rubygems.org
+# See README for more info at: https://github.com/ndbroadbent/bundler_local_development
+gem 'bundler_local_development', :group => :development, :require => false
+begin
+  require 'bundler_local_development'
+  Bundler.development_gems = [/^ffcrm_/]
+rescue LoadError
+end
 
 # Removes a gem dependency
 def remove(name)
@@ -37,7 +46,7 @@ group :development, :test do
   gem 'headless'
   unless ENV["CI"]
     gem 'ruby-debug', :platform => :mri_18
-    gem 'debugger',   :platform => :mri_19
+    gem (RUBY_VERSION == "1.9.2" ? 'ruby-debug19' : 'debugger'), :platform => :mri_19
   end
   gem 'pry-rails'
 end
@@ -65,7 +74,7 @@ end
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'therubyracer', :platform => :ruby  # C Ruby (MRI) or Rubinius, but NOT Windows
+  gem 'execjs', :platform => :ruby  # C Ruby (MRI) or Rubinius, but NOT Windows
   gem 'uglifier',     '>= 1.0.3'
 end
 
